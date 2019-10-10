@@ -1,5 +1,8 @@
 # Data files ignore rules are on data/.gitignore
 
+# venv
+tcc_emap
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
