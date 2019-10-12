@@ -3,6 +3,7 @@
 
 from paths import RAW_PATH, TREAT_PATH, OUTPUT_PATH, FIGURES_PATH
 
+import os
 from copy import deepcopy
 import numpy as np
 import pandas as pd
