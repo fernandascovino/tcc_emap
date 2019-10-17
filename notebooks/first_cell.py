@@ -21,3 +21,5 @@ plotly.offline.init_notebook_mode(connected=True)
 
 cf.go_offline()
 cf.set_config_file(offline=False, world_readable=True)
+
+colorscale = ['#025951', '#8BD9CA', '#BF7F30', '#F2C124', '#8C470B', '#DFC27D']
