@@ -1,5 +1,8 @@
 # Data files ignore rules are on data/.gitignore
 
+# models sav files
+models
+
 # venv
 tcc_emap
 
