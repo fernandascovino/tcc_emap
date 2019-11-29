@@ -1,4 +1,3 @@
-# %load first_cell.py
 %reload_ext autoreload
 %autoreload 2
 
@@ -9,7 +8,6 @@ from copy import deepcopy
 import numpy as np
 import pandas as pd
 pd.options.display.max_columns = 999
-import pandas_profiling
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -25,5 +23,7 @@ from plot_metrics import plot_roc, plot_confusion
 
 cf.go_offline()
 cf.set_config_file(offline=False, world_readable=True)
+
+from utils import *
 
 colorscale = ['#025951', '#8BD9CA', '#BF7F30', '#F2C124', '#8C470B', '#DFC27D']
