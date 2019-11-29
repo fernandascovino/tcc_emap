@@ -89,6 +89,12 @@ write.csv(df_pred_test, file = '../data/output/df_pred_test_str_lmer.csv')
 write.csv(summary(nullmod3)$coefficients, file = '../data/output/mod_nulo_var_fcoeff.csv')
 write.csv(VarCorr(nullmod3), file = '../data/output/mod_nulo_var_rcoeff.csv')
 
+# Calculando partição da variância: https://github.com/jknowles/merTools/blob/master/R/helpers.R
+between <- as.numeric(as.data.frame(VarCorr(nullmod3))$vcov)
+within <- (pi^2)/3
+ICC <- between / (within + between)
+ICC
+
 # ======= (modbase): Baseline (idade) ===============
 formula = L1_IN_EVASAO ~ L1_NU_IDADE_REFERENCIA_NORM
 
@@ -179,12 +185,14 @@ modl2_ee <- ranef(modl2)
 write.csv(modl2_ee, file = '../data/output/modl2_efeito_escola.csv')
 
 # =============>> FALTA: Coeficiente aleatório ======
-formula = L1_IN_EVASAO ~ L1_IN_TRANSPORTE_PUBLICO +
-  L1_NU_IDADE_REFERENCIA_NORM +
-  (L1_IN_TRANSPORTE_PUBLICO | L2_NU_INSE_VALOR:L2_CO_ENTIDADE) +
-  (L1_NU_IDADE_REFERENCIA_NORM | L2_NU_INSE_VALOR:L2_CO_ENTIDADE) + 
-  (1 | L2_CO_ENTIDADE)
-# L1_IN_DISTORCAO
+formula = L1_IN_EVASAO ~ L1_IN_SEXO + 
+  L1_IN_TRANSPORTE_PUBLICO + 
+  L1_IN_MUNICIPIO_NASC_RIO + 
+  L1_NU_IDADE_REFERENCIA_NORM + 
+  (1 + L1_IN_SEXO + 
+     L1_IN_TRANSPORTE_PUBLICO +
+     L1_IN_MUNICIPIO_NASC_RIO +
+     L1_NU_IDADE_REFERENCIA_NORM | L2_CO_ENTIDADE)
 
 # Modelo com random intercept:
 modl3 <- glmer(formula, data=df_train, family=binomial(link="logit"),
