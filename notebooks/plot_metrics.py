@@ -78,11 +78,11 @@ def plot_roc(y_test, y_score, title, colors=colorscale):
                                name='{} (area = {})'.format(model, round(roc_auc, 2))))
         i +=1
 
-    layout = dict(xaxis=dict(title='Especificidade: VN/(FP+FN)'), 
-                  yaxis=dict(title='Sensibilidade: VP/(VP+FN)'), 
+    layout = dict(xaxis=dict(title='Taxa de falsos positivos (TFP)'), 
+                  yaxis=dict(title='Taxa de verdadeiros positivos (TVP)'), 
                   title=title)
 
-    fig = go.Figure(data, layout)
+    fig = go.Figure(data=data, layout=layout)
     cf.iplot(fig)
     
 from sklearn.metrics import precision_score, recall_score
@@ -166,5 +166,5 @@ def plot_cover(df_cover, df_cover_rand, label_rand, title='Percentual de cobertu
            ]
 
     layout = dict(xaxis=dict(title='% de alunos cobertos (ordenado pela prob. de evasão)'), title=title)
-    fig = go.Figure(data, layout)
+    fig = go.Figure(data=data, layout=layout)
     cf.iplot(fig)

@@ -225,43 +225,17 @@ nullmod <- glm(L1_IN_EVASAO~1, data=df_train, family=binomial(link="logit"))
 aicModels <- c(nullmod$aic, AIC(logLik(nullmod1)), modbase$aic, modl1$aic, AIC(logLik(modl2)), AIC(logLik(modl3)))
 aicModels
 
-models <- list(nullmod1, modl1, modl2, modl3, test)
+models <- list(nullmod1, nullmod3, modl1, modl2, modl3)
 # Deviance residuals
-data.frame(models = c('nullmod1', 'modl1', 'modl2', 'modl3', 'idade*comun'),
+data.frame(models = c('nullmod1', 'modl1', 'modl2', 'modl3'),
            deviance = round(unlist(lapply(models, deviance)),2), 
            df       = unlist(lapply(models,df.residual)))
 
-# ==== Salvando os resultados =======
+# ==== Salvando os modelos =======
+# saveRDS(nullmod1, file='../models/mod_null.rds')
+# saveRDS(nullmod3, file='../models/mod_var_escola.rds')
+# saveRDS(modl1, file='../models/mod_l1.rds')
+# saveRDS(modl2, file='../models/mod_intercepto.rds')
+
 # write.csv(df_pred_train, file = '../data/output/df_pred_train_str_lmer.csv')
 # write.csv(df_pred_test, file = '../data/output/df_pred_test_str_lmer.csv')
-
-
-# Another way
-# ll.null <- nullmod$null.deviance/-2
-# ll.proposed <- modl2$deviance/-2
-# (ll.null - ll.proposed)/ll.null
-
-# Check for the p-value od the model
-# 1 - pchisq(91690 - 82814, 66139 - 66133)
-
-# Verificando resultado: ICC(outcome="L1_IN_EVASAO",group="L2_CO_ENTIDADE_NORM",data=df)
-# plot(df_train$L2_CO_ENTIDADE, resid(nullmod1), ylab="Resíduos", xlab="Escolas") 
-# abline(0, 0)
-
-# Extract model results
-# library(broom)
-# model.data <- augment(nullmod1) %>% mutate(index = 1:n()) 
-# ggplot(model.data, aes(index, .resid)) + 
-#   geom_point(aes(color = L1_IN_EVASAO), alpha = .5) +
-#   theme_bw()
-
-# Extract model results
-# library(broom)
-# model.data <- augment(modl1) %>% mutate(index = 1:n()) 
-# ggplot(model.data, aes(index, .resid)) + 
-#   geom_point(aes(color = L1_IN_EVASAO), alpha = .5) +
-#   theme_bw()
-
-
-# df_train_strat <- read.csv('../data/treated/modelo/df_train_strat.csv')
-# colnames(df_train)

@@ -1,5 +1,9 @@
 # Data files ignore rules are on data/.gitignore
 
+# R history
+scripts/.Rhistory
+scripts/.RData
+
 # models sav files
 models
 
