@@ -1,6 +1,7 @@
 # Data files ignore rules are on data/.gitignore
 
 # R history
+.Rhistory
 scripts/.Rhistory
 scripts/.RData
 
